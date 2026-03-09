@@ -15,6 +15,8 @@
     - P6Spy
     - Docker
 
+- Config
+    - AppConfig - настройки приложения. Загружаются из файла application.properties
 - Domain:
     - City
     - Country
@@ -24,3 +26,10 @@
     - CountryDAO
 - Redis DTO - класс CityCountryDto (плоская структура, готова для кэша)
 - Mapper - класс CityMapper для трансформации данных
+
+Хранение логина и пароля в переменных окружения. 
+Требуется настроить значения DB_PASSWORD, DB_USER
+
+Профессиональный бенчмаркинг с JMH
+
+Система миграций Flyway 

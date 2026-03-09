@@ -1,8 +1,10 @@
 package ru.javarush;
 
 import lombok.extern.slf4j.Slf4j;
+import org.flywaydb.core.Flyway;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Environment;
 import ru.javarush.dao.CityDAO;
 import ru.javarush.dao.CountryDAO;
 import ru.javarush.db.DatabaseSessionFactory;
@@ -28,6 +30,7 @@ public class CityCacheApp {
     }
 
     public static void main(String[] args) {
+        runMigrations();
         CityCacheApp app = new CityCacheApp();
         List<CityCountryDto> preparedData = CityMapper.toDtos(app.fetchAllCities());
         app.pushToRedis(preparedData);
@@ -56,5 +59,18 @@ public class CityCacheApp {
     private void shutdown() {
         DatabaseSessionFactory.shutdown();
         redisClient.shutdown();
+    }
+
+    private static void runMigrations() {
+        String dbUser = System.getenv("DB_USER");
+        String dbPassword = System.getenv("DB_PASSWORD");
+        String dbUrl = DatabaseSessionFactory.getSessionFactory().getProperties().get(Environment.URL).toString();
+
+        Flyway flyway = Flyway.configure()
+                .dataSource(dbUrl, dbUser, dbPassword)
+                .baselineOnMigrate(true)
+                .baselineVersion("0")
+                .load();
+        flyway.migrate();
     }
 }
