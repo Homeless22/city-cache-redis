@@ -1,0 +1,1 @@
+CREATE INDEX idx_country_name ON world.country(name);

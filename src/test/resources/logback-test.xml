@@ -1,0 +1,3 @@
+<configuration>
+    <logger name="io.lettuce.core" level="OFF"/>
+</configuration>
