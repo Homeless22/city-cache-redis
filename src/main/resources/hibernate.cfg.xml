@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.p6spy.engine.spy.P6SpyDriver</property>
+        <property name="hibernate.connection.url">jdbc:p6spy:mysql://localhost:3306/world</property>
+
+        <!-- Hibernate properties -->
+        <property name="hibernate.current_session_context_class">thread</property>
+        <!--property name="hibernate.hbm2ddl.auto">none</property-->
+        <property name="hibernate.jdbc.batch_size">100</property>
+
+        <!-- Show SQL in console -->
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">false</property>
+    </session-factory>
+</hibernate-configuration>
